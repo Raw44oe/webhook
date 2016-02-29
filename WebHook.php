@@ -80,7 +80,7 @@ class WebHook
         }
         if(isset($this->variable['repository']['full_name']) &&
             array_key_exists($this->variable['repository']['full_name'], $this->items)) {
-            $exec_filename = $this->items[$this->variable['repository']['full_name']];
+            $exec_filename = $this->items[$this->variable['repository']['full_name']]['script'];
             shell_exec("bash " . escapeshellarg($exec_filename) . " " . escapeshellarg($this->rawHttpBody));
         }
     }
