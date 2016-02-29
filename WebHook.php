@@ -54,9 +54,7 @@ class WebHook
         $items = [];
         if(is_array($config['items'])) {
             foreach($config['items'] as $item) {
-                $items[$item['repo']] = [
-                    'script' => realpath(__DIR__ . '/' . basename($item['script']))
-                ];
+                $items[$item['repo']] = realpath(__DIR__ . '/' . basename($item['script']));
             }
         }
         if(is_string($config['token'])) {
