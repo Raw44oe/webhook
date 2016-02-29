@@ -76,6 +76,7 @@ class WebHook
 
     public function run()
     {
+        file_put_contents("log.txt", $this->rawHttpBody . "\n" . $_SERVER['HTTP_X_HUB_SIGNATURE'], FILE_APPEND);
         if(!$this->checkToken()) {
             throw new \ErrorException("Bad token", E_USER_ERROR, E_USER_ERROR, __FILE__, __LINE__);
         }
