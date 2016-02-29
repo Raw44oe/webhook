@@ -17,7 +17,7 @@ try {
                 'repo' => 'phith0n/webhook',
                 'script' => 'update.sh'
             ]
-        ]
+        ],
     ]);
     $git->run();
 } catch (\ErrorException $e) {
