@@ -14,9 +14,9 @@ try {
         "type" => "github",
         "items" => [
             [
-                'repo' => 'git@github.com:phith0n/webhook.git',
+                'repo' => 'phith0n/webhook',
                 'branch' => 'master',
-                'script' => '.'
+                'script' => 'update.sh'
             ]
         ]
     ]);

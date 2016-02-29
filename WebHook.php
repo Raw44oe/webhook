@@ -54,11 +54,10 @@ class WebHook
         $items = [];
         if(is_array($config['items'])) {
             foreach($config['items'] as $item) {
-                array_push($items, [
-                    'repo' => $item['repo'],
+                $items[$item['repo']] = [
                     'branch' => $item['branch'],
-                    'script' => realpath($item['script'])
-                ]);
+                    'script' => realpath(__DIR__ . '/' . basename($item['script']))
+                ];
             }
         }
         if(is_string($config['token'])) {
@@ -77,11 +76,14 @@ class WebHook
 
     public function run()
     {
-        //file_put_contents("log.txt", $this->rawHttpBody . "\n" . $_SERVER['HTTP_X_HUB_SIGNATURE'], FILE_APPEND);
         if(!$this->checkToken()) {
             throw new \ErrorException("Bad token", E_USER_ERROR, E_USER_ERROR, __FILE__, __LINE__);
         }
-        file_put_contents("log.txt", $this->rawHttpBody . "\n", FILE_APPEND);
+        if(isset($this->variable['repository']['full_name']) &&
+            array_key_exists($this->variable['repository']['full_name'], $this->items)) {
+            $exec_filename = $this->items[$this->variable['repository']['full_name']];
+            shell_exec("bash " . escapeshellarg($exec_filename) . " " . escapeshellarg($this->rawHttpBody));
+        }
     }
 
     function __destruct()
