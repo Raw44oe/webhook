@@ -26,4 +26,5 @@ try {
     $git->run();
 } catch (\ErrorException $e) {
     echo "Error: " . $e->getMessage();
+    error_log($e->getMessage(), 0);
 }
