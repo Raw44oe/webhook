@@ -37,7 +37,7 @@ class WebHook
             case "github":
                 $sign = isset($_SERVER['HTTP_X_HUB_SIGNATURE']) ? $_SERVER['HTTP_X_HUB_SIGNATURE'] : "";
                 list ($algo, $sign) = explode("=", $sign);
-                $ret = ($algo == "sha1" && $sign === hash_hmac("sha1", $this->rawHttpBody, $this->token));
+                $ret = ($algo == "sha1" && $sign === hash_hmac($algo, $this->rawHttpBody, $this->token));
                 break;
             case "coding":
                 $ret = isset($this->variable['token']) && $this->variable['token'] === $this->token;
@@ -77,7 +77,7 @@ class WebHook
 
     public function run()
     {
-        file_put_contents("log.txt", $this->rawHttpBody . "\n" . $_SERVER['HTTP_X_HUB_SIGNATURE'], FILE_APPEND);
+        //file_put_contents("log.txt", $this->rawHttpBody . "\n" . $_SERVER['HTTP_X_HUB_SIGNATURE'], FILE_APPEND);
         if(!$this->checkToken()) {
             throw new \ErrorException("Bad token", E_USER_ERROR, E_USER_ERROR, __FILE__, __LINE__);
         }
