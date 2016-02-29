@@ -55,7 +55,6 @@ class WebHook
         if(is_array($config['items'])) {
             foreach($config['items'] as $item) {
                 $items[$item['repo']] = [
-                    'branch' => $item['branch'],
                     'script' => realpath(__DIR__ . '/' . basename($item['script']))
                 ];
             }

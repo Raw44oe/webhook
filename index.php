@@ -15,7 +15,6 @@ try {
         "items" => [
             [
                 'repo' => 'phith0n/webhook',
-                'branch' => 'master',
                 'script' => 'update.sh'
             ]
         ]
