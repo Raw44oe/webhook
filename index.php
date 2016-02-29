@@ -13,10 +13,7 @@ try {
         "token" => "12345678",
         "type" => "github",
         "items" => [
-            [
-                'repo' => 'phith0n/webhook',
-                'script' => 'update.sh'
-            ]
+            "phith0n/webhook" => "update.sh"
         ]
     ]);
     $git->run();
