@@ -21,7 +21,8 @@ class WebHook
     {
         set_error_handler([$this, 'exceptCatch']);
         $this->items = $this->parseConfig($config);
-        $this->variable = $this->parseVariable();
+        $this->rawHttpBody = file_get_contents('php://input');
+        $this->variable = $this->parseVariable($this->rawHttpBody);
     }
 
     protected function exceptCatch($errno, $errstr, $errfile, $errline, $errcontext)
@@ -68,10 +69,9 @@ class WebHook
         return $items;
     }
 
-    protected function parseVariable()
+    protected function parseVariable($data)
     {
-        $this->rawHttpBody = file_get_contents('php://input');
-        return json_decode($this->rawHttpBody, true);
+        return json_decode($data, true);
     }
 
     public function run()
