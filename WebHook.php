@@ -34,7 +34,7 @@ class WebHook
         $ret = false;
         switch($this->type) {
             case "github":
-                $sign = isset($_SERVER['HTTP_X_Hub_Signature']) ? $_SERVER['HTTP_X_Hub_Signature'] : "";
+                $sign = isset($_SERVER['HTTP_X_HUB_SIGNATURE']) ? $_SERVER['HTTP_X_HUB_SIGNATURE'] : "";
                 $ret = ($sign === hash_hmac("sha1", $this->rawHttpBody, $this->token));
                 break;
             case "coding":
