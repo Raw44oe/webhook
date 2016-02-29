@@ -8,23 +8,15 @@
 
 require_once "WebHook.php";
 
-error_reporting(-1);
-ini_set("display_errors", true);
-
-try {
-    $git = new GitTool\WebHook([
-        "token" => "12345678",
-        "type" => "github",
-        "items" => [
-            [
-                'repo' => 'git@github.com:phith0n/webhook.git',
-                'branch' => 'master',
-                'script' => '.'
-            ]
+$git = new GitTool\WebHook([
+    "token" => "12345678",
+    "type" => "github",
+    "items" => [
+        [
+            'repo' => 'git@github.com:phith0n/webhook.git',
+            'branch' => 'master',
+            'script' => '.'
         ]
-    ]);
-    $git->run();
-} catch (\ErrorException $e) {
-    echo "Error: " . $e->getMessage();
-}
-
+    ]
+]);
+$git->run();
