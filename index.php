@@ -22,6 +22,7 @@ try {
     ]);
     $git->run();
 } catch (\ErrorException $e) {
-    echo "Error: " . $e->getMessage();
-    error_log($e->getMessage(), 0);
+    $error = "Error: " . $e->getMessage() . " File: " . $e->getFile() . ":" . $e->getLine();
+    echo $error;
+    error_log($error, 0);
 }
