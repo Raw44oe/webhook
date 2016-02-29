@@ -8,6 +8,9 @@
 
 require_once "WebHook.php";
 
+error_reporting(-1);
+ini_set("display_errors", true);
+
 $git = new GitTool\WebHook([
     "token" => "12345678",
     "type" => "github",
