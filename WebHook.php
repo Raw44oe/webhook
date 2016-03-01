@@ -16,6 +16,10 @@ class WebHook
     protected $variable = [];
     protected $rawHttpBody;
     protected $type = "github";
+    protected $type_define = [
+        "github" => "full_name",
+        "coding" => "name"
+    ];
 
     function __construct($config)
     {
@@ -76,9 +80,10 @@ class WebHook
         if(!$this->checkToken()) {
             throw new \ErrorException("Bad token", E_USER_ERROR, E_USER_ERROR, __FILE__, __LINE__);
         }
-        if(isset($this->variable['repository']['full_name']) &&
-            array_key_exists($this->variable['repository']['full_name'], $this->items)) {
-            $exec_filename = $this->items[$this->variable['repository']['full_name']];
+        $name = $this->variable['repository'][$this->type_define[$this->type]];
+        if($name &&
+            array_key_exists($name, $this->items)) {
+            $exec_filename = $this->items[$name];
             shell_exec("bash " . escapeshellarg($exec_filename) . " " . escapeshellarg($this->rawHttpBody));
         }
     }

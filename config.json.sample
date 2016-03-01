@@ -1,0 +1,7 @@
+{
+  "token": "token",
+  "type": "coding",
+  "items": {
+    "es-db": "update.sh"
+  }
+}

@@ -8,14 +8,9 @@
 
 require_once "WebHook.php";
 
+$config = json_decode(file_get_contents("./config.json"), true);
 try {
-    $git = new GitTool\WebHook([
-        "token" => "12345678",
-        "type" => "github",
-        "items" => [
-            "phith0n/webhook" => "update.sh"
-        ]
-    ]);
+    $git = new GitTool\WebHook($config);
     $git->run();
 } catch (\ErrorException $e) {
     $error = "Error: " . $e->getMessage() . " File: " . $e->getFile() . ":" . $e->getLine();
